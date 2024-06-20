@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Teacher;
 use App\Http\Requests\StoreTeacherRequest;
 use App\Http\Requests\UpdateTeacherRequest;
@@ -25,7 +26,7 @@ class TeacherController extends Controller
      */
     public function create()
     {
-        //
+        return view('teacher.create');
     }
 
     /**
@@ -36,7 +37,20 @@ class TeacherController extends Controller
      */
     public function store(StoreTeacherRequest $request)
     {
-        //
+        if($request->profile){
+            $file = $request->profile;
+            $newName = 'teacher_'.uniqid().'.'.$file->extension();
+            $file->storeAs('public/teacher',$newName);
+        }
+        $teacher = new User();
+        $teacher->name = $request->name;
+        $teacher->email = $request->email;
+        $teacher->phone = $request->phone;
+        $teacher->gender = $request->gender;
+        $teacher->date_of_birth = $request->date_of_birth;
+        $teacher->address = $request->address;
+        $teacher->profile = $newName;
+        $teacher->save();
     }
 
     /**

@@ -21,21 +21,21 @@
                               </tr>
                             </thead>
                             <tbody>
-                              @foreach ($teachers as $teacher)
+                              @foreach ($students as $student)
                               <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ $teacher->name }}</td>
-                                <td>{{ $teacher->email }}</td>
-                                <td>{{ $teacher->phone }}</td>
-                                <td>{{ $teacher->gender }}</td>
-                                <td>{{ $teacher->date_of_birth }}</td>
-                                <td>{{ $teacher->address }}</td>
+                                <th scope="row">{{ $loop->iteration }}</th>
+                                <td>{{ $student->name }}</td>
+                                <td>{{ $student->email }}</td>
+                                <td>{{ $student->phone }}</td>
+                                <td>{{ $student->gender }}</td>
+                                <td>{{ $student->date_of_birth }}</td>
+                                <td>{{ $student->address }}</td>
                                 <td>
-                                    <img src="{{ asset('storage/teacher/'.$teacher->profile) }}" width="50px" height="50px">
+                                    <img src="{{ asset('storage/student/'.$student->profile) }}" width="50px" height="50px">
                                 </td>
                                 <td>
-                                    <a href="{{ route('teacher.edit',$teacher->id) }}" class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i></a>
-                                    <form action="{{ route('teacher.destroy',$teacher->id) }}" method="POST" class=" d-inline-block">
+                                    <a href="{{ route('student.edit',$student->id) }}" class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i></a>
+                                    <form action="{{ route('student.destroy',$student->id) }}" method="POST" class=" d-inline-block">
                                         @csrf
                                         @method('delete')
                                         <button class="btn btn-danger"><i class="fa-solid fa-trash"></i></button>

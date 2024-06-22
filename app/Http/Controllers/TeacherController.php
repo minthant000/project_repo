@@ -16,7 +16,8 @@ class TeacherController extends Controller
      */
     public function index()
     {
-        //
+        $teachers = User::where('role','1')->get();
+        return view ('teacher.index',compact('teachers'));
     }
 
     /**
@@ -49,8 +50,10 @@ class TeacherController extends Controller
         $teacher->gender = $request->gender;
         $teacher->date_of_birth = $request->date_of_birth;
         $teacher->address = $request->address;
+        $teacher->role = '1';
         $teacher->profile = $newName;
         $teacher->save();
+        return redirect()->route('teacher.index');
     }
 
     /**
@@ -70,9 +73,11 @@ class TeacherController extends Controller
      * @param  \App\Models\Teacher  $teacher
      * @return \Illuminate\Http\Response
      */
-    public function edit(Teacher $teacher)
+    public function edit($id)
     {
-        //
+        $teacher = User::findOrFail($id);
+        //return $teacher;
+        return view('teacher.edit',compact('teacher'));
     }
 
     /**
@@ -82,9 +87,24 @@ class TeacherController extends Controller
      * @param  \App\Models\Teacher  $teacher
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateTeacherRequest $request, Teacher $teacher)
+    public function update(UpdateTeacherRequest $request, $id)
     {
-        //
+        $teacher = User::findOrFail($id);
+        if($request->profile){
+            $file = $request->profile;
+            $newName = 'teacher_'.uniqid().'.'.$file->extension();
+            $file->storeAs('public/teacher',$newName);
+            $teacher->profile = $newName;
+        }
+        $teacher->name = $request->name;
+        $teacher->email = $request->email;
+        $teacher->phone = $request->phone;
+        $teacher->gender = $request->gender;
+        $teacher->date_of_birth = $request->date_of_birth;
+        $teacher->address = $request->address;
+        $teacher->role = '1';
+        $teacher->update();
+        return redirect()->route('teacher.index');
     }
 
     /**
@@ -93,8 +113,12 @@ class TeacherController extends Controller
      * @param  \App\Models\Teacher  $teacher
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Teacher $teacher)
+    public function destroy($id)
     {
-        //
+        $teacher = User::findOrFail($id);
+        if($teacher){
+            $teacher->delete();
+        }
+        return redirect()->route('teacher.index');
     }
 }

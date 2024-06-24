@@ -6,6 +6,11 @@
             <div class="col-12">
                 <div class="card mt-4">
                     <div class="card-body">
+                        <div class="col-3">
+                            <a href="{{ route('teacher.create') }}">
+                                <button class="btn btn-outline-primary">Create <i class="fa-solid fa-plus"></i></button>
+                            </a>
+                        </div>
                         <table class="table">
                             <thead>
                               <tr>

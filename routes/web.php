@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\StudentController;
 use App\Http\Controllers\TeacherController;
 
@@ -19,6 +20,8 @@ use App\Http\Controllers\TeacherController;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::resource('admin', AdminController::class);
 
 Route::resource('teacher', TeacherController::class);
 

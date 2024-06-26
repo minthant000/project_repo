@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Student;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreStudentRequest;
 use App\Http\Requests\UpdateStudentRequest;
 
@@ -27,6 +28,9 @@ class StudentController extends Controller
      */
     public function create()
     {
+        if(Auth::user()->role == 0){
+            return redirect()->route('student.index');
+        }
         return view('student.create');
     }
 
@@ -38,6 +42,7 @@ class StudentController extends Controller
      */
     public function store(StoreStudentRequest $request)
     {
+        return $request;
         if($request->profile){
             $file = $request->profile;
             $newName = 'student_'.uniqid().'.'.$file->extension();
@@ -48,6 +53,7 @@ class StudentController extends Controller
         $student->email = $request->email;
         $student->phone = $request->phone;
         $student->gender = $request->gender;
+        $student->role = '0';
         $student->date_of_birth = $request->date_of_birth;
         $student->address = $request->address;
         $student->profile = $newName;
@@ -75,6 +81,9 @@ class StudentController extends Controller
     public function edit($id)
     {
         $student = User::findOrFail($id);
+        if(Auth::user()->role == 0){
+            return redirect()->route('student.index');
+        }
         return view('student.edit',compact('student'));
     }
 
@@ -100,7 +109,8 @@ class StudentController extends Controller
         $student->gender = $request->gender;
         $student->date_of_birth = $request->date_of_birth;
         $student->address = $request->address;
-        $student->save();
+        $student->role = '0';
+        $student->update();
         return redirect()->route('student.index');
     }
 

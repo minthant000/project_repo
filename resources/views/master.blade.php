@@ -71,22 +71,107 @@
         <div class="image">
           <img src="{{ asset('dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
         </div>
-        <div class="info">
-          <a href="#" class="d-block">Min Thant Htet</a>
+        <div class="info text-capitalize">
+          <a href="#" class="d-block">{{ Auth::user()->name }}</a>
         </div>
       </div>
 
       <!-- Sidebar Menu -->
       <nav class="mt-2">
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
-          <li class="nav-item">
-            <a href="pages/widgets.html" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
-              <p>
-                Widgets
-              </p>
-            </a>
-          </li>
+            @if (Auth::user()->role == 2)
+            <li class="nav-item">
+                <a href="{{ route('admin.create') }}" class="nav-link">
+                <i class="nav-icon fas fa-th"></i>
+                <p>
+                    Create Admin
+                </p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="{{ route('admin.index') }}" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p>
+                    Admin List
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('teacher.create') }}" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p>
+                    Create Teacher
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('teacher.index') }}" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p>
+                    Teacher List
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('student.create') }}" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p>
+                    Create Student
+                  </p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="{{ route('student.index') }}" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p>
+                    Student List
+                  </p>
+                </a>
+              </li>
+            @elseif(Auth::user()->role == 1)
+                  <li class="nav-item">
+                    <a href="{{ route('teacher.index') }}" class="nav-link">
+                      <i class="nav-icon fas fa-th"></i>
+                      <p>
+                        Teacher List
+                      </p>
+                    </a>
+                  </li>
+
+                <li class="nav-item">
+                    <a href="{{ route('student.create') }}" class="nav-link">
+                    <i class="nav-icon fas fa-th"></i>
+                    <p>
+                        Create Student
+                    </p>
+                    </a>
+                </li>
+                  <li class="nav-item">
+                    <a href="{{ route('student.index') }}" class="nav-link">
+                      <i class="nav-icon fas fa-th"></i>
+                      <p>
+                        Student List
+                      </p>
+                    </a>
+                  </li>
+            @else
+            <li class="nav-item">
+                <a href="{{ route('teacher.index') }}" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p>
+                    Teacher List
+                  </p>
+                </a>
+              </li>
+            <li class="nav-item">
+                <a href="{{ route('student.index') }}" class="nav-link">
+                  <i class="nav-icon fas fa-th"></i>
+                  <p>
+                    Student List
+                  </p>
+                </a>
+              </li>
+            @endif
         </ul>
       </nav>
       <!-- /.sidebar-menu -->
@@ -112,8 +197,16 @@
   <footer class="main-footer">
     <strong>Copyright &copy; 2014-2024 <a href="https://adminlte.io">Admin Dashboard</a>.</strong>
     All rights reserved.
-    <div class="float-right d-none d-sm-inline-block">
-      <b>Version</b> 3.2.0
+    <div class="float-right d-none d-sm-inline-block mb-3">
+            <a class="btn btn-dark" href="{{ route('logout') }}"
+               onclick="event.preventDefault();
+                             document.getElementById('logout-form').submit();">
+                {{ __('Logout') }}
+            </a>
+
+            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                @csrf
+            </form>
     </div>
   </footer>
 

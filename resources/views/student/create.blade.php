@@ -36,6 +36,59 @@
                                   </div>
                             </div>
                             <div class="mb-3">
+                                <h5>Skills</h5>
+                                <div class="form-check">
+                                    <input class="form-check-input" name="skills[]" type="checkbox" value="php" id="php">
+                                    <label class="form-check-label" for="php">
+                                      PHP
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input class="form-check-input" name="skills[]" type="checkbox" value="java" id="java">
+                                    <label class="form-check-label" for="java">
+                                      Java
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input class="form-check-input" name="skills[]" type="checkbox" value="react" id="react">
+                                    <label class="form-check-label" for="react">
+                                      React
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input class="form-check-input" name="skills[]" type="checkbox" value="web_development" id="web_development">
+                                    <label class="form-check-label" for="web_development">
+                                      web development
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input class="form-check-input" name="skills[]" type="checkbox" value="server" id="server">
+                                    <label class="form-check-label" for="server">
+                                      Server
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input class="form-check-input" name="skills[]" type="checkbox" value="aws" id="aws">
+                                    <label class="form-check-label" for="aws">
+                                      AWS
+                                    </label>
+                                  </div>
+                                  <div class="form-check">
+                                    <input class="form-check-input" name="skills[]" type="checkbox" value="web_design" id="web_design">
+                                    <label class="form-check-label" for="web_design">
+                                      web design
+                                    </label>
+                                  </div>
+                            </div>
+                            <div class="mb-3">
+                                <div class="form-check">
+                                    <input class="form-check-input" name="is_fullstack" type="checkbox" value="" id="is_fullstack">
+                                    <label class="form-check-label" for="is_fullstack">
+                                      Fullstack Developer
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="mb-3">
                                 <label for="exampleFormControlTextarea1" class="form-label">Date of Birth</label>
                                 <input type="date" name="date_of_birth" class="form-control" id="exampleFormControlTextarea1" placeholder=""></input>
                             </div>

@@ -6,11 +6,6 @@
             <div class="col-12">
                 <div class="card mt-4">
                     <div class="card-body">
-                        <div class="col-3">
-                            <a href="{{ route('teacher.create') }}">
-                                <button class="btn btn-outline-primary">Create <i class="fa-solid fa-plus"></i></button>
-                            </a>
-                        </div>
                         <table class="table">
                             <thead>
                               <tr>
@@ -22,7 +17,11 @@
                                 <th scope="col">Date of Birth</th>
                                 <th scope="col">Address</th>
                                 <th scope="col">Profile</th>
-                                <th scope="col">Action</th>
+                                @if (Auth::user()->role == 2)
+                                    <th scope="col">Action</th>
+                                @else
+                                    <th scope="col" class="d-none">Action</th>
+                                @endif
                               </tr>
                             </thead>
                             <tbody>
@@ -38,14 +37,25 @@
                                 <td>
                                     <img src="{{ asset('storage/teacher/'.$teacher->profile) }}" width="50px" height="50px">
                                 </td>
-                                <td>
-                                    <a href="{{ route('teacher.edit',$teacher->id) }}" class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i></a>
-                                    <form action="{{ route('teacher.destroy',$teacher->id) }}" method="POST" class=" d-inline-block">
-                                        @csrf
-                                        @method('delete')
-                                        <button class="btn btn-danger"><i class="fa-solid fa-trash"></i></button>
-                                    </form>
-                                </td>
+                                @if (Auth::user()->role == 2)
+                                    <td>
+                                        <a href="{{ route('teacher.edit',$teacher->id) }}" class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i></a>
+                                        <form action="{{ route('teacher.destroy',$teacher->id) }}" method="POST" class=" d-inline-block">
+                                            @csrf
+                                            @method('delete')
+                                            <button class="btn btn-danger"><i class="fa-solid fa-trash"></i></button>
+                                        </form>
+                                    </td>
+                                @else
+                                    <td>
+                                        <a href="{{ route('teacher.edit',$teacher->id) }}" class="btn btn-warning d-none"><i class="fa-solid fa-pen-to-square"></i></a>
+                                        <form action="{{ route('teacher.destroy',$teacher->id) }}" method="POST" class=" d-inline-block d-none">
+                                            @csrf
+                                            @method('delete')
+                                            <button class="btn btn-danger d-none"><i class="fa-solid fa-trash"></i></button>
+                                        </form>
+                                    </td>
+                                @endif
                               </tr>
                               @endforeach
                             </tbody>

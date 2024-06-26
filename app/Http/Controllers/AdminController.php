@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Admin;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreAdminRequest;
 use App\Http\Requests\UpdateAdminRequest;
 
@@ -17,7 +18,10 @@ class AdminController extends Controller
     public function index()
     {
         $admins = User::where('role','2')->get();
-        return view('admin.index',compact('admins'));
+        if(Auth::user()->role == 2){
+            return view('admin.index',compact('admins'));
+        }
+        return back();
     }
 
     /**
@@ -27,7 +31,11 @@ class AdminController extends Controller
      */
     public function create()
     {
-        return view('admin.create');
+        if(Auth::user()->role == 2){
+            return view('admin.create');
+        }
+        return back();
+
     }
 
     /**
@@ -49,7 +57,6 @@ class AdminController extends Controller
         $admin->phone = $request->phone;
         $admin->gender = $request->gender;
         $admin->date_of_birth = $request->date_of_birth;
-        $admin->role = '2';
         $admin->address = $request->address;
         $admin->profile = $profile;
         // return $admin;
@@ -77,7 +84,10 @@ class AdminController extends Controller
     public function edit($id)
     {
         $admin = User::findOrFail($id);
-        return view('admin.edit',compact('admin'));
+        if(Auth::user()->role == 2){
+            return view('admin.edit',compact('admin'));
+        }
+        return back();
     }
 
     /**
@@ -91,7 +101,7 @@ class AdminController extends Controller
     {
         $admin = User::findOrFail($id);
         if($request->profile){
-            $file = $request->file;
+            $file = $request->profile;
             $profile = 'admin_'.uniqid().'.'.$file->extension();
             $file->storeAs('public/admin',$profile);
             $admin->profile = $profile;

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Teacher;
+use Illuminate\Support\Facades\Auth;
 use App\Http\Requests\StoreTeacherRequest;
 use App\Http\Requests\UpdateTeacherRequest;
 
@@ -17,6 +18,9 @@ class TeacherController extends Controller
     public function index()
     {
         $teachers = User::where('role','1')->get();
+        if(Auth::user()->role == 0){
+            return redirect()->route('student.index');
+        }
         return view ('teacher.index',compact('teachers'));
     }
 
@@ -27,7 +31,10 @@ class TeacherController extends Controller
      */
     public function create()
     {
-        return view('teacher.create');
+        if(Auth::user()->role == 2){
+            return view('teacher.create');
+        }
+        return back();
     }
 
     /**
@@ -77,7 +84,10 @@ class TeacherController extends Controller
     {
         $teacher = User::findOrFail($id);
         //return $teacher;
-        return view('teacher.edit',compact('teacher'));
+        if(Auth::user()->role == 2){
+            return view('teacher.edit',compact('teacher'));
+        }
+        return back();
     }
 
     /**

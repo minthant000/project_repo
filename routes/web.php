@@ -21,11 +21,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::resource('admin', AdminController::class);
+Route::resource('admin', AdminController::class)->middleware('auth');
 
-Route::resource('teacher', TeacherController::class);
+Route::resource('teacher', TeacherController::class)->middleware('auth');
 
-Route::resource('student', StudentController::class);
+Route::resource('student', StudentController::class)->middleware('auth');
 
 Auth::routes();
 

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Admin;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\StoreAdminRequest;
 use App\Http\Requests\UpdateAdminRequest;
 
@@ -54,6 +55,7 @@ class AdminController extends Controller
         $admin = new User();
         $admin->name = $request->name;
         $admin->email = $request->email;
+        $admin->password = Hash::make($request->password);
         $admin->phone = $request->phone;
         $admin->gender = $request->gender;
         $admin->date_of_birth = $request->date_of_birth;
@@ -109,8 +111,8 @@ class AdminController extends Controller
         $admin->name = $request->name;
         $admin->email = $request->email;
         $admin->phone = $request->phone;
-        $admin->gender = $admin->gender;
-        $admin->date_of_birth = $admin->date_of_birth;
+        $admin->gender = $request->gender;
+        $admin->date_of_birth = $request->date_of_birth;
         $admin->address = $request->address;
         $admin->update();
         return redirect()->route('admin.index');

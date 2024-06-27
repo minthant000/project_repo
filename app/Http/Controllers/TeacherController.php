@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Teacher;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\StoreTeacherRequest;
 use App\Http\Requests\UpdateTeacherRequest;
 
@@ -53,6 +54,7 @@ class TeacherController extends Controller
         $teacher = new User();
         $teacher->name = $request->name;
         $teacher->email = $request->email;
+        $teacher->password = Hash::make($request->password);
         $teacher->phone = $request->phone;
         $teacher->gender = $request->gender;
         $teacher->date_of_birth = $request->date_of_birth;

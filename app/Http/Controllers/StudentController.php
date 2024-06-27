@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Student;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\StoreStudentRequest;
 use App\Http\Requests\UpdateStudentRequest;
 
@@ -42,7 +43,6 @@ class StudentController extends Controller
      */
     public function store(StoreStudentRequest $request)
     {
-        return $request;
         if($request->profile){
             $file = $request->profile;
             $newName = 'student_'.uniqid().'.'.$file->extension();
@@ -51,12 +51,23 @@ class StudentController extends Controller
         $student = new User();
         $student->name = $request->name;
         $student->email = $request->email;
+        $student->password = Hash::make($request->password);
         $student->phone = $request->phone;
         $student->gender = $request->gender;
+        // $student->skills = [
+        //     'php' => 'PHP',
+        //     'java' => 'Java',
+        //     'react' => 'React',
+        //     'web_development' => 'Web Development',
+        //     'server' => 'Server',
+        //     'aws' => 'AWS',
+        //     'web_design' => 'Web Design',
+        // ];
         $student->role = '0';
         $student->date_of_birth = $request->date_of_birth;
         $student->address = $request->address;
         $student->profile = $newName;
+        // return $request;
         $student->save();
         return redirect()->route('student.index');
     }

@@ -35,11 +35,19 @@
                                 </td>
                                 <td>
                                     <a href="{{ route('admin.edit',$admin->id) }}" class="btn btn-warning"><i class="fa-solid fa-pen-to-square"></i></a>
-                                    <form action="{{ route('admin.destroy',$admin->id) }}" method="POST" class=" d-inline-block">
-                                        @csrf
-                                        @method('delete')
-                                        <button class="btn btn-danger"><i class="fa-solid fa-trash"></i></button>
-                                    </form>
+                                    @if ($admin->id == Auth::user()->id)
+                                        <form action="{{ route('admin.destroy',$admin->id) }}" method="POST" class=" d-inline-block d-none">
+                                            @csrf
+                                            @method('delete')
+                                            <button class="btn btn-danger d-none"><i class="fa-solid fa-trash"></i></button>
+                                        </form>
+                                    @else
+                                        <form action="{{ route('admin.destroy',$admin->id) }}" method="POST" class=" d-inline-block">
+                                            @csrf
+                                            @method('delete')
+                                            <button class="btn btn-danger"><i class="fa-solid fa-trash"></i></button>
+                                        </form>
+                                    @endif
                                 </td>
                               </tr>
                               @endforeach

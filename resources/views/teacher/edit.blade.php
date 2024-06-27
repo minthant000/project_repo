@@ -10,19 +10,19 @@
                             @csrf
                             @method('put')
                             <div class="mb-3">
-                                <label for="exampleFormControlInput1" class="form-label">Name</label>
-                                <input type="text" name="name" class="form-control" id="exampleFormControlInput1" placeholder="Name" value="{{ $teacher->name }}">
+                                <label for="name" class="form-label">Name</label>
+                                <input type="text" name="name" class="form-control" id="name" placeholder="Name" value="{{ $teacher->name }}">
                             </div>
                             <div class="mb-3">
-                                <label for="exampleFormControlTextarea1" class="form-label">Email</label>
-                                <input type="email" name="email" class="form-control" id="exampleFormControlTextarea1" placeholder="email" value="{{ $teacher->email }}">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" name="email" class="form-control" id="email" placeholder="email" value="{{ $teacher->email }}">
                             </div>
                             <div class="mb-3">
-                                <label for="exampleFormControlTextarea1" class="form-label">Phone</label>
-                                <input type="text" name="phone" class="form-control" id="exampleFormControlTextarea1" placeholder="phone" value="{{ $teacher->phone }}">
+                                <label for="phone" class="form-label">Phone</label>
+                                <input type="text" name="phone" class="form-control" id="phone" placeholder="phone" value="{{ $teacher->phone }}">
                             </div>
                             <div class="mb-3">
-                                <label for="exampleFormControlTextarea1" class="form-label">Gender</label>
+                                <label for="gender" class="form-label">Gender</label>
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="gender" id="male" value="1" {{ $teacher->gender == 1 ? 'checked':'' }}>
                                     <label class="form-check-label" for="male">
@@ -37,17 +37,17 @@
                                   </div>
                             </div>
                             <div class="mb-3">
-                                <label for="exampleFormControlTextarea1" class="form-label">Date of Birth</label>
-                                <input type="date" name="date_of_birth" class="form-control" id="exampleFormControlTextarea1" value="{{ $teacher->date_of_birth }}"></input>
+                                <label for="date_of_birth" class="form-label">Date of Birth</label>
+                                <input type="date" name="date_of_birth" class="form-control" id="date_of_birth" value="{{ $teacher->date_of_birth }}"></input>
                             </div>
                             <div class="mb-3">
-                                <label for="exampleFormControlTextarea1" class="form-label">Address</label>
-                                <input type="text" name="address" class="form-control" id="exampleFormControlTextarea1" placeholder="address" value="{{ $teacher->address }}"></input>
+                                <label for="address" class="form-label">Address</label>
+                                <input type="text" name="address" class="form-control" id="address" placeholder="address" value="{{ $teacher->address }}"></input>
                             </div>
                             <div class="mb-3">
-                                <label for="exampleFormControlTextarea1" class="form-label">Profile</label><br>
+                                <label for="profile" class="form-label">Profile</label><br>
                                 <img src="{{ asset('storage/teacher/'.$teacher->profile) }}" width="150px" height="150px"><br><br>
-                                <input type="file" name="profile" class="form-control" id="exampleFormControlTextarea1" placeholder=""></input>
+                                <input type="file" name="profile" class="form-control" id="profile" placeholder=""></input>
                             </div>
                             <div class="mb-3">
                                 <button class="btn btn-primary">Submit</button>
